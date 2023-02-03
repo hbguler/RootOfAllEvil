@@ -17,35 +17,32 @@ namespace Game.Scripts
 
         private float _characterCurrentSpeed;
         private Vector3 _movementVector;
-        
+
         private Coroutine _movementCoroutine;
+
         private Coroutine _rotationCoroutine;
 
-        public void Update()
+        public void Initialize()
         {
-            if (Input.GetKeyDown(KeyCode.W))
-                _movementVector += Vector3.forward;
-            if (Input.GetKeyDown(KeyCode.S))
-                _movementVector += Vector3.back;
-            if (Input.GetKeyDown(KeyCode.A))
-                _movementVector += Vector3.left;
-            if (Input.GetKeyDown(KeyCode.D))
-                _movementVector += Vector3.right;
             
-            if (Input.GetKeyUp(KeyCode.W))
-                _movementVector -= Vector3.forward;
-            if (Input.GetKeyUp(KeyCode.S))
-                _movementVector -= Vector3.back;
-            if (Input.GetKeyUp(KeyCode.A))
-                _movementVector -= Vector3.left;
-            if (Input.GetKeyUp(KeyCode.D))
-                _movementVector -= Vector3.right;
+        }
 
+        public void SetMovementVector(Vector3 movementVector)
+        {
+            _movementVector = movementVector;
+            
             if (_movementCoroutine == null)
                 _movementCoroutine = StartCoroutine(MovementCoroutine());
 
             if (_rotationCoroutine == null)
                 _rotationCoroutine = StartCoroutine(RotationCoroutine());
+        }
+
+        public void Stop()
+        {
+            _rigidbody.velocity = Vector3.zero;
+            _movementVector = Vector3.zero;
+            _animator.SetFloat(_idleRunAnimationWeight, 0);
         }
 
         private IEnumerator MovementCoroutine()
@@ -85,6 +82,11 @@ namespace Game.Scripts
  
                 yield return null;
             }
+        }
+
+        public Vector3 GetMovementVector()
+        {
+            return _movementVector;
         }
     }
 }

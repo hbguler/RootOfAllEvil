@@ -1,16 +1,25 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game.Scripts
 {
     public class CharacterBehaviour : MonoBehaviour
     {
-        [SerializeField] private CharacterMovementBehaviour _cmb;
+        public Animator Animator;
+        public int Health;
 
-        public void Initialize()
+        public virtual void TakeHit(int damage)
         {
-            
+            Health -= damage;
+
+            if (Health <= 0)
+            {
+                Die();
+            }
+        }
+
+        public virtual void Die()
+        {
+            Animator.SetTrigger("Die");
         }
     }
 }

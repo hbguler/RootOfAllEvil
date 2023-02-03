@@ -1,14 +1,27 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 namespace Game.Scripts.Levels
 {
-    public class LevelBehaviour : MonoBehaviour
+    public sealed class LevelBehaviour : MonoBehaviour
     {
-        [SerializeField] private CharacterBehaviour _cb;
-        public virtual void Initialize()
+        [SerializeField] private PlayerBehaviour _player;
+        [SerializeField] private List<EnemyBehaviour> _enemies;
+
+        private void Start()
         {
-            _cb.Initialize();
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            _player.Initialize();
+
+            foreach (var enemy in _enemies)
+            {
+                enemy.Initialize(_player);
+            }
         }
     }
 }
