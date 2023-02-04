@@ -2,18 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Scripts.Interactable;
+using Game.Scripts.Levels;
 using Game.Scripts.Movement;
 using UnityEngine;
 
 namespace Game.Scripts
 {
-    public enum PlayerType
-    {
-        None = 0,
-        Old = 1,
-        Modern = 2
-    }
-
     public enum InteractionType
     {
         None = 0,
@@ -23,9 +17,10 @@ namespace Game.Scripts
     
     public class PlayerBehaviour : CharacterBehaviour
     {
+        
         [SerializeField] private PlayerMovementBehaviour _pmb;
         [SerializeField] private List<Animator> _animators;
-        private PlayerType _playerType;
+        private TimeState _playerType;
         [SerializeField] private SubPlayerBehaviour _oldPlayer;
         [SerializeField] private SubPlayerBehaviour _modernPlayer;
 
@@ -40,7 +35,6 @@ namespace Game.Scripts
         {
             _pmb.Initialize();
             _canAttack = true;
-            SwitchCharacter();
         }
 
         private void Update()
@@ -48,11 +42,6 @@ namespace Game.Scripts
             if (Input.GetMouseButtonDown(0) && _canAttack)
             {
                 _attackCoroutine = StartCoroutine(AttackCoroutine());
-            }
-
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                SwitchCharacter();
             }
 
             if (Input.GetKeyDown(KeyCode.E))
@@ -122,13 +111,13 @@ namespace Game.Scripts
         {
             _canAttack = false;
             
-            if (_playerType == PlayerType.Modern)
+            if (_playerType == TimeState.Future)
             {
                 _modernPlayer.Animator.SetTrigger("RangeAttack");
                 _modernPlayer.Weapon.Attack(transform.forward);
                 yield return new WaitForSeconds(GameConfig.RangedAttackInterval);
             }
-            else if (_playerType == PlayerType.Old)
+            else if (_playerType == TimeState.Past)
             {
                 _oldPlayer.Animator.SetTrigger("MeleeAttack");
                 _oldPlayer.Weapon.Attack(transform.forward);
@@ -138,22 +127,17 @@ namespace Game.Scripts
             _canAttack = true;
         }
 
-        private void SwitchCharacter()
+        public void SwitchCharacter(TimeState currentTimeState)
         {
-            if (_playerType == PlayerType.None)
-            {
-                _playerType = PlayerType.Old;
-            }
+            _playerType = currentTimeState;
             
-            if (_playerType == PlayerType.Modern)
+            if (currentTimeState == TimeState.Past)
             {
-                _playerType = PlayerType.Old;
                 _oldPlayer.gameObject.SetActive(true);
                 _modernPlayer.gameObject.SetActive(false);
             }
-            else if (_playerType == PlayerType.Old)
+            else if (currentTimeState == TimeState.Future)
             {
-                _playerType = PlayerType.Modern;
                 _oldPlayer.gameObject.SetActive(false);
                 _modernPlayer.gameObject.SetActive(true);
             }
@@ -162,11 +146,11 @@ namespace Game.Scripts
         public override void Die()
         {
             base.Die();
-            if (_playerType == PlayerType.Modern)
+            if (_playerType == TimeState.Future)
             {
                 _modernPlayer.Animator.SetTrigger("Die");
             }
-            else if (_playerType == PlayerType.Old)
+            else if (_playerType == TimeState.Past)
             {
                 _oldPlayer.Animator.SetTrigger("Die");
             }
