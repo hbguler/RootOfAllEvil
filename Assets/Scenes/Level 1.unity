@@ -6817,15 +6817,65 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 398705662}
     m_Modifications:
+    - target: {fileID: 1213280328053350556, guid: 8704234d1f36a4b479faf2e9d1222308,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3123783757149156215, guid: 8704234d1f36a4b479faf2e9d1222308,
         type: 3}
       propertyPath: _animator.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4969269318615225034, guid: 8704234d1f36a4b479faf2e9d1222308,
+        type: 3}
+      propertyPath: m_Height
+      value: 1.1357689
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969269318615225034, guid: 8704234d1f36a4b479faf2e9d1222308,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.56788445
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969269318615225034, guid: 8704234d1f36a4b479faf2e9d1222308,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969269318615225034, guid: 8704234d1f36a4b479faf2e9d1222308,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1.9806676
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969269318615225034, guid: 8704234d1f36a4b479faf2e9d1222308,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.067884445
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993262603607618459, guid: 8704234d1f36a4b479faf2e9d1222308,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993262603607618459, guid: 8704234d1f36a4b479faf2e9d1222308,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.447
+      objectReference: {fileID: 0}
     - target: {fileID: 8169432972313745002, guid: 8704234d1f36a4b479faf2e9d1222308,
         type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484140697370844781, guid: 8704234d1f36a4b479faf2e9d1222308,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a9603aa200ca0c45bf4ce1b20e1a39a, type: 2}
+    - target: {fileID: 8484140697370844781, guid: 8704234d1f36a4b479faf2e9d1222308,
+        type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8772693131174363425, guid: 8704234d1f36a4b479faf2e9d1222308,
         type: 3}

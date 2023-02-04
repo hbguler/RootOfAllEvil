@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using Game.Scripts.Movement;
+using Game.Scripts.Weapon;
 using UnityEngine;
 
 namespace Game.Scripts
@@ -11,6 +12,7 @@ namespace Game.Scripts
         [SerializeField] private GameObject _model;
         [SerializeField] private CharacterMovementBehaviour _cmb;
         [SerializeField] private float _seekDistance;
+        [SerializeField] private Collider _collider;
         [SerializeField] private float _attackDistance;
 
         private readonly string MeleeAttack = "MeleeAttack";
@@ -20,9 +22,13 @@ namespace Game.Scripts
         private Coroutine _chaseCoroutine;
         private Coroutine _attackCoroutine;
 
+        private bool _isDead;
+
         public void Initialize(PlayerBehaviour player)
         {
             _player = player;
+            _collider.enabled = true;
+            _isDead = false;
 
             _cmb.Initialize();
             _seekCoroutine = StartCoroutine(SeekCoroutine());
@@ -38,10 +44,13 @@ namespace Game.Scripts
             }
             else if (collider.gameObject.layer == LayerMask.NameToLayer("MeleeWeapon"))
             {
-                TakeHit(GameConfig.MeleeDamage);
+                if (collider.gameObject.GetComponent<MeleeWeaponBehaviour>().IsAttacking)
+                {
+                    TakeHit(GameConfig.MeleeDamage);
 
-                Vector3 direction = transform.position - _player.transform.position;
-                _cmb.Knockback(direction);
+                    Vector3 direction = transform.position - _player.transform.position;
+                    _cmb.Knockback(direction);
+                }
             }
         }
 
@@ -94,19 +103,33 @@ namespace Game.Scripts
         private IEnumerator AttackCoroutine()
         {
             //_animator.SetTrigger(MeleeAttack);
-            _model.transform.DOMove(_player.transform.position, 0.25f);
-            yield return new WaitForSeconds(0.25f);
+            StopCoroutine(_chaseCoroutine);
+
+            Vector3 target = new Vector3(_player.transform.position.x, transform.position.y,
+                _player.transform.position.z);
+                
+            transform.DOShakePosition(duration: 0.75f, strength: 0.2f, fadeOut: false)
+                .OnComplete(() => transform.DOMove(target, 0.25f));
+            yield return new WaitForSeconds(0.75f);
 
             if (GetDistanceBetweenPlayerAndEnemy() < _attackDistance)
             {
                 _player.TakeHit(GameConfig.MeleeDamage);
             }
+            else
+            {
+                yield return new WaitForSeconds(0.75f);
+                
+                if(_isDead == false)
+                    _chaseCoroutine = StartCoroutine(ChaseCoroutine());
+            }
         }
 
         public override void Die()
         {
-            base.Die();
             //_animator.SetTrigger("Die");
+
+            base.Die();
             if (_attackCoroutine != null)
             {
                 StopCoroutine(_attackCoroutine);
@@ -124,7 +147,9 @@ namespace Game.Scripts
                 StopCoroutine(_chaseCoroutine);
                 _chaseCoroutine = null;
             }
-            
+
+            _isDead = true;
+            _collider.enabled = false;
             _cmb.Stop();
 
             _model.transform.DOShakePosition(1.5f, strength: 0.5f).OnComplete(() =>
