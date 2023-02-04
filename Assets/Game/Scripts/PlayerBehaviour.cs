@@ -40,7 +40,7 @@ namespace Game.Scripts
         {
             _pmb.Initialize();
             _canAttack = true;
-            _playerType = PlayerType.Modern;
+            SwitchCharacter();
         }
 
         private void Update()
