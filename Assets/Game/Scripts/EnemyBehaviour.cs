@@ -129,7 +129,7 @@ namespace Game.Scripts
 
             _model.transform.DOShakePosition(1.5f, strength: 0.5f).OnComplete(() =>
             {
-                _model.transform.DOMoveY(_model.transform.position.y - 2f, 1f).SetEase(Ease.InCubic).SetDelay(0.5f);
+                _model.transform.DOMoveY(_model.transform.position.y - 2f, 1f).SetEase(Ease.InCubic).SetDelay(0.2f);
             });
 
             _model.transform.DOShakeRotation(1.5f, strength: 0.25f);

@@ -1599,7 +1599,7 @@ MonoBehaviour:
   _model: {fileID: 1989923267408214566}
   _cmb: {fileID: 3123783757149156215}
   _seekDistance: 5
-  _attackDistance: 0.5
+  _attackDistance: 1
 --- !u!95 &3239306911271769770
 Animator:
   serializedVersion: 5
