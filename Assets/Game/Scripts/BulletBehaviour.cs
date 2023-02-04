@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using DG.Tweening;
 using UnityEngine;
 
-public class BulletBehaviour : MonoBehaviour
+namespace Game.Scripts
 {
-    // Start is called before the first frame update
-    void Start()
+    public class BulletBehaviour : MonoBehaviour
     {
+        private Tween _moveTween;
         
-    }
+        public void Fire(Vector3 bulletTarget, float time, Action action)
+        {
+            _moveTween = transform.DOMove(bulletTarget, time).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                action?.Invoke();
+            });
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void Kill()
+        {
+            _moveTween.Kill();
+            Destroy(gameObject);
+        }
     }
 }

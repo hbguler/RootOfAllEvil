@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Game.Scripts
+namespace Game.Scripts.Movement
 {
     public class CharacterMovementBehaviour : MonoBehaviour
     {
@@ -13,6 +13,8 @@ namespace Game.Scripts
         [SerializeField] private float _characterAcceleration;
         [SerializeField] private float _characterDecceleration;
 
+        [SerializeField] private float _knockbackForce = 20f;
+        
         [SerializeField] private List<Animator> _animator;
         [SerializeField] private Rigidbody _rigidbody;
 
@@ -94,6 +96,11 @@ namespace Game.Scripts
         public Vector3 GetMovementVector()
         {
             return _movementVector;
+        }
+
+        public void Knockback(Vector3 direction)
+        {
+            _rigidbody.AddForce(direction * _knockbackForce, ForceMode.Impulse);
         }
     }
 }

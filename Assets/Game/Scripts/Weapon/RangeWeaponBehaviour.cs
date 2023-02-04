@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO.Compression;
 using DG.Tweening;
 using UnityEngine;
 
@@ -28,8 +29,10 @@ namespace Game.Scripts.Weapon
 
             Vector3 bulletTarget = bullet.transform.position + direction * 20;
             float time = bulletTarget.magnitude / _bulletSpeed;
-            bullet.transform.DOMove(bulletTarget, time).OnComplete(() => { Destroy(bullet.gameObject); })
-                .SetEase(Ease.Linear);
+            bullet.Fire(bulletTarget, time, () =>
+            {
+                Destroy(bullet.gameObject);
+            });
         }
     }
 }

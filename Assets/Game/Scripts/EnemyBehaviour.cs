@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using DG.Tweening;
+using Game.Scripts.Movement;
 using UnityEngine;
 
 namespace Game.Scripts
@@ -10,9 +12,9 @@ namespace Game.Scripts
         [SerializeField] private CharacterMovementBehaviour _cmb;
         [SerializeField] private float _seekDistance;
         [SerializeField] private float _attackDistance;
-        
+
         private readonly string MeleeAttack = "MeleeAttack";
-        
+
         private PlayerBehaviour _player;
         private Coroutine _seekCoroutine;
         private Coroutine _chaseCoroutine;
@@ -21,9 +23,26 @@ namespace Game.Scripts
         public void Initialize(PlayerBehaviour player)
         {
             _player = player;
-            
+
             _cmb.Initialize();
             _seekCoroutine = StartCoroutine(SeekCoroutine());
+        }
+
+        private void OnTriggerEnter(Collider collider)
+        {
+            if (collider.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+            {
+                BulletBehaviour bullet = collider.gameObject.GetComponent<BulletBehaviour>();
+                bullet.Kill();
+                TakeHit(GameConfig.RangeDamage);
+            }
+            else if (collider.gameObject.layer == LayerMask.NameToLayer("MeleeWeapon"))
+            {
+                TakeHit(GameConfig.MeleeDamage);
+
+                Vector3 direction = transform.position - _player.transform.position;
+                _cmb.Knockback(direction);
+            }
         }
 
         private IEnumerator SeekCoroutine()
@@ -43,7 +62,7 @@ namespace Game.Scripts
 
         private void StartChasing()
         {
-            _seekCoroutine = null; 
+            _seekCoroutine = null;
             _chaseCoroutine = StartCoroutine(ChaseCoroutine());
         }
 
@@ -67,7 +86,7 @@ namespace Game.Scripts
                     Vector3 targetVector = (_player.transform.position - transform.position).normalized;
                     _cmb.SetMovementVector(targetVector);
                 }
-                
+
                 yield return null;
             }
         }
@@ -82,6 +101,12 @@ namespace Game.Scripts
             {
                 _player.TakeHit(GameConfig.MeleeDamage);
             }
+        }
+
+        public override void Die()
+        {
+            base.Die();
+            _animator.SetTrigger("Die");
         }
 
         private float GetDistanceBetweenPlayerAndEnemy()
