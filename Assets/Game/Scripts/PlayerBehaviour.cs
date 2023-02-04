@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Game.Scripts.Interactable;
 using Game.Scripts.Movement;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace Game.Scripts
     public class PlayerBehaviour : CharacterBehaviour
     {
         [SerializeField] private PlayerMovementBehaviour _pmb;
+        [SerializeField] private List<Animator> _animators;
         private PlayerType _playerType;
         [SerializeField] private SubPlayerBehaviour _oldPlayer;
         [SerializeField] private SubPlayerBehaviour _modernPlayer;
@@ -55,22 +57,51 @@ namespace Game.Scripts
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                
+                Debug.LogError("Interaction requested");
+                switch (_currentInteractionType)
+                {
+                    case InteractionType.None:
+                        break;
+                    case InteractionType.Climb:
+                        Debug.LogError("Climb started");
+
+                        foreach (Animator animator in _animators)
+                        {
+                            animator.SetTrigger("Climb");
+                        }
+
+                        (_currentInteractable as VineBehaviour).Climb(this);
+                        VineBehaviour.ClimbCompleted += OnClimbCompleted;
+                        break;
+                    case InteractionType.Carry:
+                        break;
+                }
             }
+        }
+
+        public void OnClimbCompleted()
+        {
+            Debug.LogError("Climb completed");
+
+            VineBehaviour.ClimbCompleted -= OnClimbCompleted;
+            foreach (Animator animator in _animators)
+                animator.SetTrigger("Idle");
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.GetComponent<InteractableBehaviour>() != null)
+            if (other.gameObject.CompareTag("Interactable"))
             {
-                if (other.gameObject.GetComponent<VineBehaviour>() != null)
+                if (other.gameObject.GetComponentInParent<VineBehaviour>() != null)
                 {
-                    _currentInteractable = other.gameObject.GetComponent<VineBehaviour>();
+                    _currentInteractable = other.gameObject.GetComponentInParent<VineBehaviour>();
                     _currentInteractionType = InteractionType.Climb;
+                    
+                    Debug.LogError("Climb enter");
                 }
-                else if (other.gameObject.GetComponent<RockBehaviour>() != null)
+                else if (other.gameObject.GetComponentInParent<RockBehaviour>() != null)
                 {
-                    _currentInteractable = other.gameObject.GetComponent<RockBehaviour>();
+                    _currentInteractable = other.gameObject.GetComponentInParent<RockBehaviour>();
                     _currentInteractionType = InteractionType.Carry;
                 }
             }
@@ -78,10 +109,12 @@ namespace Game.Scripts
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.GetComponent<InteractableBehaviour>())
+            if (other.gameObject.CompareTag("Interactable"))
             {
                 _currentInteractable = null;
                 _currentInteractionType = InteractionType.None;
+                
+                Debug.LogError("Interaction exit");
             }
         }
 
