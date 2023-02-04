@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Game.Scripts.Interactable;
 using Game.Scripts.Movement;
 using UnityEngine;
 
@@ -9,6 +11,13 @@ namespace Game.Scripts
         None = 0,
         Old = 1,
         Modern = 2
+    }
+
+    public enum InteractionType
+    {
+        None = 0,
+        Climb = 1,
+        Carry = 2
     }
     
     public class PlayerBehaviour : CharacterBehaviour
@@ -21,6 +30,9 @@ namespace Game.Scripts
         private float _attackIntervalTime = 2f;
         private bool _canAttack = false;
         private Coroutine _attackCoroutine;
+
+        private InteractableBehaviour _currentInteractable;
+        private InteractionType _currentInteractionType;
 
         public void Initialize()
         {
@@ -36,9 +48,40 @@ namespace Game.Scripts
                 _attackCoroutine = StartCoroutine(AttackCoroutine());
             }
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 SwitchCharacter();
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.GetComponent<InteractableBehaviour>() != null)
+            {
+                if (other.gameObject.GetComponent<VineBehaviour>() != null)
+                {
+                    _currentInteractable = other.gameObject.GetComponent<VineBehaviour>();
+                    _currentInteractionType = InteractionType.Climb;
+                }
+                else if (other.gameObject.GetComponent<RockBehaviour>() != null)
+                {
+                    _currentInteractable = other.gameObject.GetComponent<RockBehaviour>();
+                    _currentInteractionType = InteractionType.Carry;
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.GetComponent<InteractableBehaviour>())
+            {
+                _currentInteractable = null;
+                _currentInteractionType = InteractionType.None;
             }
         }
 
