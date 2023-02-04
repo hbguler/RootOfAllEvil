@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -12,14 +13,13 @@ namespace Game.Scripts
         [SerializeField] private float _characterAcceleration;
         [SerializeField] private float _characterDecceleration;
 
-        [SerializeField] private Animator _animator;
+        [SerializeField] private List<Animator> _animator;
         [SerializeField] private Rigidbody _rigidbody;
 
         private float _characterCurrentSpeed;
         private Vector3 _movementVector;
 
         private Coroutine _movementCoroutine;
-
         private Coroutine _rotationCoroutine;
 
         public void Initialize()
@@ -42,7 +42,11 @@ namespace Game.Scripts
         {
             _rigidbody.velocity = Vector3.zero;
             _movementVector = Vector3.zero;
-            _animator.SetFloat(_idleRunAnimationWeight, 0);
+
+            foreach (Animator animator in _animator)
+            {
+                animator.SetFloat(_idleRunAnimationWeight, 0);
+            }
         }
 
         private IEnumerator MovementCoroutine()
@@ -65,7 +69,10 @@ namespace Game.Scripts
                     _rigidbody.velocity = _rigidbody.transform.forward * _characterCurrentSpeed;
                 }
                 
-                _animator.SetFloat(_idleRunAnimationWeight, _characterCurrentSpeed / _characterMaxSpeed);
+                foreach (Animator animator in _animator)
+                {
+                    animator.SetFloat(_idleRunAnimationWeight, _characterCurrentSpeed / _characterMaxSpeed);
+                }
 
                 yield return null;
             }

@@ -4,7 +4,6 @@ namespace Game.Scripts
 {
     public class CharacterBehaviour : MonoBehaviour
     {
-        public Animator Animator;
         public int Health;
 
         public virtual void TakeHit(int damage)
@@ -19,7 +18,7 @@ namespace Game.Scripts
 
         public virtual void Die()
         {
-            Animator.SetTrigger("Die");
+            
         }
     }
 }

@@ -1593,8 +1593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9969cbeb0d9724025b2ffc31f15ab6f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 3239306911271769770}
   Health: 5
+  _animator: {fileID: 3239306911271769770}
   _cmb: {fileID: 3123783757149156215}
   _seekDistance: 5
   _attackDistance: 0.5
@@ -1633,7 +1633,8 @@ MonoBehaviour:
   _characterMaxSpeed: 4
   _characterAcceleration: 10
   _characterDecceleration: 20
-  _animator: {fileID: 3239306911271769770}
+  _animator:
+  - {fileID: 3239306911271769770}
   _rigidbody: {fileID: 2334988774692306919}
 --- !u!54 &2334988774692306919
 Rigidbody:

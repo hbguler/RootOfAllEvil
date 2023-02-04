@@ -6,6 +6,7 @@ namespace Game.Scripts
 {
     public class EnemyBehaviour : CharacterBehaviour
     {
+        [SerializeField] private Animator _animator;
         [SerializeField] private CharacterMovementBehaviour _cmb;
         [SerializeField] private float _seekDistance;
         [SerializeField] private float _attackDistance;
@@ -73,7 +74,7 @@ namespace Game.Scripts
 
         private IEnumerator AttackCoroutine()
         {
-            Animator.SetTrigger(MeleeAttack);
+            _animator.SetTrigger(MeleeAttack);
 
             yield return new WaitForSeconds(0.75f);
 
