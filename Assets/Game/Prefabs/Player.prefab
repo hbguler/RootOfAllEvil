@@ -1035,3 +1035,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b59dd91bee848f880723814f208644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &6495376918694196838
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7461102425393389528}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3491871, y: 1.2679021, z: 0.32794476}
+  m_Center: {x: 0.0019157332, y: 0.4686883, z: -0.0087054465}

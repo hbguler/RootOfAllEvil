@@ -120,19 +120,21 @@ namespace Game.Scripts
 
         private IEnumerator AttackCoroutine()
         {
+            _canAttack = false;
+            
             if (_playerType == PlayerType.Modern)
             {
                 _modernPlayer.Animator.SetTrigger("RangeAttack");
                 _modernPlayer.Weapon.Attack(transform.forward);
+                yield return new WaitForSeconds(GameConfig.RangedAttackInterval);
             }
             else if (_playerType == PlayerType.Old)
             {
                 _oldPlayer.Animator.SetTrigger("MeleeAttack");
                 _oldPlayer.Weapon.Attack(transform.forward);
+                yield return new WaitForSeconds(GameConfig.MeleeAttackInterval);
             }
             
-            _canAttack = false;
-            yield return new WaitForSeconds(_attackIntervalTime);
             _canAttack = true;
         }
 
