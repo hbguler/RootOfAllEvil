@@ -106,7 +106,7 @@ namespace Game.Scripts
             StopCoroutine(_chaseCoroutine);
 
             Vector3 target = new Vector3(_player.transform.position.x, transform.position.y,
-                _player.transform.position.z);
+                _player.transform.position.z) + (_player.transform.position - transform.position).normalized * 2f;
                 
             transform.DOShakePosition(duration: 0.75f, strength: 0.2f, fadeOut: false)
                 .OnComplete(() => transform.DOMove(target, 0.25f));
@@ -119,9 +119,12 @@ namespace Game.Scripts
             else
             {
                 yield return new WaitForSeconds(0.75f);
-                
-                if(_isDead == false)
+
+                if (_isDead == false)
+                {
                     _chaseCoroutine = StartCoroutine(ChaseCoroutine());
+                    _attackCoroutine = null;
+                }
             }
         }
 

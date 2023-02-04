@@ -6827,31 +6827,6 @@ PrefabInstance:
       propertyPath: _animator.Array.size
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4969269318615225034, guid: 8704234d1f36a4b479faf2e9d1222308,
-        type: 3}
-      propertyPath: m_Height
-      value: 1.1357689
-      objectReference: {fileID: 0}
-    - target: {fileID: 4969269318615225034, guid: 8704234d1f36a4b479faf2e9d1222308,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.56788445
-      objectReference: {fileID: 0}
-    - target: {fileID: 4969269318615225034, guid: 8704234d1f36a4b479faf2e9d1222308,
-        type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4969269318615225034, guid: 8704234d1f36a4b479faf2e9d1222308,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 1.9806676
-      objectReference: {fileID: 0}
-    - target: {fileID: 4969269318615225034, guid: 8704234d1f36a4b479faf2e9d1222308,
-        type: 3}
-      propertyPath: m_Center.z
-      value: -0.067884445
-      objectReference: {fileID: 0}
     - target: {fileID: 7993262603607618459, guid: 8704234d1f36a4b479faf2e9d1222308,
         type: 3}
       propertyPath: m_LocalPosition.x
