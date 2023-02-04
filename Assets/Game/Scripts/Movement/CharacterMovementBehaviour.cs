@@ -8,13 +8,14 @@ namespace Game.Scripts.Movement
     public class CharacterMovementBehaviour : MonoBehaviour
     {
         private readonly string _idleRunAnimationWeight = "IdleRun";
-        
+
         [SerializeField] private float _characterMaxSpeed;
         [SerializeField] private float _characterAcceleration;
         [SerializeField] private float _characterDecceleration;
 
         [SerializeField] private float _knockbackForce = 20f;
-        
+
+        [SerializeField] private bool _useAnimation;
         [SerializeField] private List<Animator> _animator;
         [SerializeField] private Rigidbody _rigidbody;
 
@@ -26,13 +27,12 @@ namespace Game.Scripts.Movement
 
         public void Initialize()
         {
-            
         }
 
         public void SetMovementVector(Vector3 movementVector)
         {
             _movementVector = movementVector;
-            
+
             if (_movementCoroutine == null)
                 _movementCoroutine = StartCoroutine(MovementCoroutine());
 
@@ -45,9 +45,12 @@ namespace Game.Scripts.Movement
             _rigidbody.velocity = Vector3.zero;
             _movementVector = Vector3.zero;
 
-            foreach (Animator animator in _animator)
+            if (_useAnimation)
             {
-                animator.SetFloat(_idleRunAnimationWeight, 0);
+                foreach (Animator animator in _animator)
+                {
+                    animator.SetFloat(_idleRunAnimationWeight, 0);
+                }
             }
         }
 
@@ -59,7 +62,7 @@ namespace Game.Scripts.Movement
                     _characterCurrentSpeed += Time.deltaTime * _characterAcceleration;
                 else
                     _characterCurrentSpeed -= Time.deltaTime * _characterDecceleration;
-                
+
                 _characterCurrentSpeed = Mathf.Clamp(_characterCurrentSpeed, 0, _characterMaxSpeed);
 
                 if (_movementVector.sqrMagnitude > 0)
@@ -70,10 +73,13 @@ namespace Game.Scripts.Movement
                 {
                     _rigidbody.velocity = _rigidbody.transform.forward * _characterCurrentSpeed;
                 }
-                
-                foreach (Animator animator in _animator)
+
+                if (_useAnimation)
                 {
-                    animator.SetFloat(_idleRunAnimationWeight, _characterCurrentSpeed / _characterMaxSpeed);
+                    foreach (Animator animator in _animator)
+                    {
+                        animator.SetFloat(_idleRunAnimationWeight, _characterCurrentSpeed / _characterMaxSpeed);
+                    }
                 }
 
                 yield return null;
@@ -88,7 +94,7 @@ namespace Game.Scripts.Movement
                 {
                     _rigidbody.transform.DOLookAt(transform.position + _movementVector, 0.25f);
                 }
- 
+
                 yield return null;
             }
         }

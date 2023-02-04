@@ -8,7 +8,7 @@ namespace Game.Scripts
 {
     public class EnemyBehaviour : CharacterBehaviour
     {
-        [SerializeField] private Animator _animator;
+        [SerializeField] private GameObject _model;
         [SerializeField] private CharacterMovementBehaviour _cmb;
         [SerializeField] private float _seekDistance;
         [SerializeField] private float _attackDistance;
@@ -93,9 +93,9 @@ namespace Game.Scripts
 
         private IEnumerator AttackCoroutine()
         {
-            _animator.SetTrigger(MeleeAttack);
-
-            yield return new WaitForSeconds(0.75f);
+            //_animator.SetTrigger(MeleeAttack);
+            _model.transform.DOMove(_player.transform.position, 0.25f);
+            yield return new WaitForSeconds(0.25f);
 
             if (GetDistanceBetweenPlayerAndEnemy() < _attackDistance)
             {
@@ -106,7 +106,33 @@ namespace Game.Scripts
         public override void Die()
         {
             base.Die();
-            _animator.SetTrigger("Die");
+            //_animator.SetTrigger("Die");
+            if (_attackCoroutine != null)
+            {
+                StopCoroutine(_attackCoroutine);
+                _attackCoroutine = null;
+            }
+
+            if (_seekCoroutine != null)
+            {
+                StopCoroutine(_seekCoroutine);
+                _seekCoroutine = null;
+            }
+
+            if (_chaseCoroutine != null)
+            {
+                StopCoroutine(_chaseCoroutine);
+                _chaseCoroutine = null;
+            }
+            
+            _cmb.Stop();
+
+            _model.transform.DOShakePosition(1.5f, strength: 0.5f).OnComplete(() =>
+            {
+                _model.transform.DOMoveY(_model.transform.position.y - 2f, 1f).SetEase(Ease.InCubic).SetDelay(0.5f);
+            });
+
+            _model.transform.DOShakeRotation(1.5f, strength: 0.25f);
         }
 
         private float GetDistanceBetweenPlayerAndEnemy()

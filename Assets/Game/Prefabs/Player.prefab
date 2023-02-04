@@ -506,6 +506,7 @@ MonoBehaviour:
   _characterAcceleration: 10
   _characterDecceleration: 20
   _knockbackForce: 20
+  _useAnimation: 1
   _animator:
   - {fileID: 757877788398276682}
   - {fileID: 5152159982090403165}
@@ -982,6 +983,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4871424351930207741, guid: ac3124a19f65582408c1f69400c1064a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac3124a19f65582408c1f69400c1064a,
         type: 3}
