@@ -6,13 +6,21 @@ namespace Game.Scripts.Movement
     {
         [SerializeField] private CharacterMovementBehaviour _cmb;
 
+        private bool _canMove;
         public void Initialize()
         {
             _cmb.Initialize();
+            _canMove = true;
         }
 
         public void Update()
         {
+            if (_canMove == false)
+            {
+                _cmb.SetMovementVector(Vector3.zero);
+                return;
+            }
+            
             Vector3 movementVector = Vector3.zero;
 
             if (Input.GetKey(KeyCode.W))
@@ -25,6 +33,11 @@ namespace Game.Scripts.Movement
                 movementVector += Vector3.right;
             
             _cmb.SetMovementVector(movementVector.normalized);
+        }
+
+        public void ToggleMovement(bool canMove)
+        {
+            _canMove = canMove;
         }
     }
 }
