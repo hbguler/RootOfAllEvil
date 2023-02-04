@@ -47,10 +47,12 @@ namespace Game.Scripts
             if (_playerType == PlayerType.Modern)
             {
                 _modernPlayer.Animator.SetTrigger("RangeAttack");
+                _modernPlayer.Weapon.Attack(transform.forward);
             }
             else if (_playerType == PlayerType.Old)
             {
                 _oldPlayer.Animator.SetTrigger("MeleeAttack");
+                _oldPlayer.Weapon.Attack(transform.forward);
             }
             
             _canAttack = false;
