@@ -1,34 +1,9 @@
 fileFormatVersion: 2
-guid: 6ba79b319e601724bab77cf790be9fc4
+guid: 5f58361fc76aaeb46ae3fdcf8f3b2b24
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Enemy_Material
-    second: {fileID: 2100000, guid: e9f10654af7912d44bf69617c77451c0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Exit_Material
-    second: {fileID: 2100000, guid: 529067595c13a554980785e2ea27ee79, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Spawn_Material
-    second: {fileID: 2100000, guid: e9f10654af7912d44bf69617c77451c0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: _Base_Material
-    second: {fileID: 2100000, guid: 8e015bc52ba23954681eba3a9de59903, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: q
-    second: {fileID: 2100000, guid: 529067595c13a554980785e2ea27ee79, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -60,7 +35,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 7
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -113,7 +88,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 7
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
