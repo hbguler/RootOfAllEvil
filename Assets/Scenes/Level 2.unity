@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.635
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.07204971, g: 0.09650567, b: 0.24990742, a: 0.635}
+  m_IndirectSpecularColor: {r: 0.07204971, g: 0.09642808, b: 0.24990742, a: 0.635}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -611,7 +611,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 50
+  field of view: 20
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -637,7 +637,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767174789}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -0.14, y: 9, z: -24.350002}
+  m_LocalPosition: {x: -0.14, y: 19.93, z: -31.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1059,7 +1059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 11.2465, z: -11.230001}
+  m_FollowOffset: {x: 0, y: 22.1765, z: -18.56}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -6535,7 +6535,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 1270751503}
   m_Follow: {fileID: 1270751503}
   m_Lens:
-    FieldOfView: 50
+    FieldOfView: 20
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -6560,7 +6560,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591864811}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -0.14, y: 9, z: -24.350002}
+  m_LocalPosition: {x: -0.14, y: 19.93, z: -31.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
