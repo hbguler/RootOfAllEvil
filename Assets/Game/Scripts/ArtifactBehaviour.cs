@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts.Weapon;
 using UnityEngine;
 
 namespace Game.Scripts
@@ -8,13 +10,15 @@ namespace Game.Scripts
     {
         public static event Action ArtifactDestroyed;
         [SerializeField] private List<ParticleSystem> _explosionParticles;
+        [SerializeField] private GameObject _victoryText;
+        [SerializeField] private MeshRenderer _evilMesh;
         
         private int _hp = 1;
         
         private void OnTriggerEnter(Collider collider)
         {
-            if (collider.gameObject.layer == LayerMask.NameToLayer("MeleeWeapon")||
-            collider.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+            if (collider.gameObject.layer == LayerMask.NameToLayer("Bullet") ||
+             (collider.gameObject.layer == LayerMask.NameToLayer("MeleeWeapon") && collider.gameObject.GetComponent<MeleeWeaponBehaviour>().IsAttacking))
             {
                 _hp--;
 
@@ -26,9 +30,17 @@ namespace Game.Scripts
                     {
                         particle.Play();
                     }
+
+                    StartCoroutine(VictoryCoroutine());
                 }
             }
+        }
 
+        private IEnumerator VictoryCoroutine()
+        {
+            yield return new WaitForSeconds(2);
+            _evilMesh.enabled = false;
+            _victoryText.gameObject.SetActive(true);
         }
     }
 }
