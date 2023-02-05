@@ -173,7 +173,7 @@ namespace Game.Scripts
 
         private IEnumerator RestartCoroutine()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(4f);
             CharacterDied?.Invoke();
         }
     }
