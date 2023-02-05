@@ -42,12 +42,15 @@ namespace Game.Scripts
             IsClimbing = false;
             
             ExitTrigger.ExitTriggered += OnExitTriggered;
+            ArtifactBehaviour.ArtifactDestroyed += OnExitTriggered;
 
         }
 
         private void OnExitTriggered()
         {
             ExitTrigger.ExitTriggered -= OnExitTriggered;
+            ArtifactBehaviour.ArtifactDestroyed -= OnExitTriggered;
+
             _pmb.ToggleMovement(false);
         }
 
