@@ -12,16 +12,18 @@ namespace Game.Scripts.Interactable
         private Tween _climbTween;
         private PlayerBehaviour _player;
 
+        private bool _isVineUsed = false;
+
         public void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.GetComponent<PlayerBehaviour>() == null)
+            if (other.gameObject.GetComponent<PlayerBehaviour>() == null || _isVineUsed)
             {
                 return;
             }
             
-            Debug.LogError("End reached, killing prev. tween and moving to end");
             _climbTween.Kill();
             _climbTween = null;
+            _isVineUsed = true;
             
             _player.gameObject.transform.DOMove(_landingTransform.position, 0.25f).OnComplete(() =>
             {

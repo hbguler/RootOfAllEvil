@@ -1601,7 +1601,7 @@ MonoBehaviour:
   _cmb: {fileID: 3123783757149156215}
   _seekDistance: 5
   _collider: {fileID: 4969269318615225034}
-  _attackDistance: 1
+  _attackDistance: 1.5
 --- !u!95 &3239306911271769770
 Animator:
   serializedVersion: 5
@@ -1668,7 +1668,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.56788445
+  m_Radius: 0.3
   m_Height: 2.2679515
   m_Direction: 1
   m_Center: {x: 0, y: 1.4145763, z: -0.067884445}

@@ -44,6 +44,7 @@ namespace Game.Scripts
             }
             else if (collider.gameObject.layer == LayerMask.NameToLayer("MeleeWeapon"))
             {
+                Debug.LogError("Roboded");
                 if (collider.gameObject.GetComponent<MeleeWeaponBehaviour>().IsAttacking)
                 {
                     TakeHit(GameConfig.MeleeDamage);
@@ -51,6 +52,14 @@ namespace Game.Scripts
                     Vector3 direction = transform.position - _player.transform.position;
                     _cmb.Knockback(direction);
                 }
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                _player.TakeHit(GameConfig.MeleeDamage);
             }
         }
 
@@ -105,26 +114,19 @@ namespace Game.Scripts
             //_animator.SetTrigger(MeleeAttack);
             StopCoroutine(_chaseCoroutine);
 
-            Vector3 target = new Vector3(_player.transform.position.x, transform.position.y,
-                _player.transform.position.z) + (_player.transform.position - transform.position).normalized * 2f;
+            Vector3 target = 
+                new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z) 
+                             + (_player.transform.position - transform.position).normalized * 2f;
                 
             transform.DOShakePosition(duration: 0.75f, strength: 0.2f, fadeOut: false)
                 .OnComplete(() => transform.DOMove(target, 0.25f));
-            yield return new WaitForSeconds(0.75f);
+            
+            yield return new WaitForSeconds(1f);
 
-            if (GetDistanceBetweenPlayerAndEnemy() < _attackDistance)
+            if (_isDead == false)
             {
-                _player.TakeHit(GameConfig.MeleeDamage);
-            }
-            else
-            {
-                yield return new WaitForSeconds(0.75f);
-
-                if (_isDead == false)
-                {
-                    _chaseCoroutine = StartCoroutine(ChaseCoroutine());
-                    _attackCoroutine = null;
-                }
+                _chaseCoroutine = StartCoroutine(ChaseCoroutine());
+                _attackCoroutine = null;
             }
         }
 
