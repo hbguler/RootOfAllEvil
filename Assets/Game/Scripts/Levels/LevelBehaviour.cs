@@ -73,5 +73,7 @@ namespace Game.Scripts.Levels
                 switchingObject.UpdateState(_currentTimeState);
             }
         }
+
+        
     }
 }
