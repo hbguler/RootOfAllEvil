@@ -26,6 +26,7 @@ namespace Game.Scripts.Weapon
             BulletBehaviour bullet = Instantiate(_bulletPrefab);
             bullet.transform.position = _weaponTip.transform.position;
             bullet.transform.localScale = Vector3.one;
+            bullet.transform.LookAt(bullet.transform.position + direction);
 
             Vector3 bulletTarget = bullet.transform.position + direction * 20;
             float time = bulletTarget.magnitude / _bulletSpeed;
