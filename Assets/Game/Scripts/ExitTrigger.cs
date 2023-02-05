@@ -6,6 +6,8 @@ namespace Game.Scripts
     public class ExitTrigger : MonoBehaviour
     {
         public static event Action ExitTriggered;
+
+        [SerializeField] private ParticleSystem _portalPS;
         private bool _isTriggered = false;
     
         private void OnTriggerEnter(Collider other)
@@ -13,6 +15,8 @@ namespace Game.Scripts
             if (other.gameObject.layer == LayerMask.NameToLayer("Player") && _isTriggered == false)
             {
                 _isTriggered = true;
+                _portalPS.Play();
+                
                 ExitTriggered?.Invoke();
             }
         }

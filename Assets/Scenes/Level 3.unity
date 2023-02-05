@@ -1154,6 +1154,7 @@ GameObject:
   - component: {fileID: 1835318989}
   - component: {fileID: 1835318988}
   - component: {fileID: 1835318987}
+  - component: {fileID: 1835318991}
   m_Layer: 0
   m_Name: Artifact_01 (1)
   m_TagString: Untagged
@@ -1346,6 +1347,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1835318985}
   m_Mesh: {fileID: -3540678117001285187, guid: 4af878f9385c17a4f9351dff5186f467, type: 3}
+--- !u!65 &1835318991
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835318985}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.8203518, y: 2.5766056, z: 1.9112681}
+  m_Center: {x: 0.0000005364417, y: -0.17443573, z: -0.000003457069}
 --- !u!1 &1952172826
 GameObject:
   m_ObjectHideFlags: 0

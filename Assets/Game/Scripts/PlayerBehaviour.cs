@@ -40,6 +40,15 @@ namespace Game.Scripts
             _canAttack = true;
 
             IsClimbing = false;
+            
+            ExitTrigger.ExitTriggered += OnExitTriggered;
+
+        }
+
+        private void OnExitTriggered()
+        {
+            ExitTrigger.ExitTriggered -= OnExitTriggered;
+            _pmb.ToggleMovement(false);
         }
 
         private void Update()

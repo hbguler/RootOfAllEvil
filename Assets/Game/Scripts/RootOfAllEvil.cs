@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Game.Scripts.Levels;
 using UnityEditor.SearchService;
@@ -43,6 +44,13 @@ namespace Game.Scripts
         private void OnExitTriggered()
         {
             ExitTrigger.ExitTriggered -= OnExitTriggered;
+
+            StartCoroutine(LoadLevelCoroutine());
+        }
+
+        private IEnumerator LoadLevelCoroutine()
+        {
+            yield return new WaitForSeconds(2f);
             LoadNextLevel();
         }
 

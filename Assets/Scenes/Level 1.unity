@@ -1446,6 +1446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 577607f1efe9d4c0eb8a12ce06834686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _portalPS: {fileID: 1482199335}
 --- !u!4 &948325914
 Transform:
   m_ObjectHideFlags: 0
@@ -1457,7 +1458,8 @@ Transform:
   m_LocalPosition: {x: -11.713, y: 0.28, z: 0.165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1482199336}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1992,6 +1994,92 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -142695771621871812, guid: 6ba79b319e601724bab77cf790be9fc4,
     type: 3}
   m_PrefabInstance: {fileID: 1256038757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1482199334
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 948325914}
+    m_Modifications:
+    - target: {fileID: 4663220532843164164, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: m_Name
+      value: Teleport_Particle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268373172580997462, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978846844352383847, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978846844352383847, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.15699959
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978846844352383847, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.89900005
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978846844352383847, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.285
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978846844352383847, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978846844352383847, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978846844352383847, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978846844352383847, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978846844352383847, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978846844352383847, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978846844352383847, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e7a00cf6d8c5c7247a71fc426ca034f0, type: 3}
+--- !u!198 &1482199335 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8268373172580997462, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1482199334}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1482199336 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8978846844352383847, guid: e7a00cf6d8c5c7247a71fc426ca034f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1482199334}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1502090823
 GameObject:
