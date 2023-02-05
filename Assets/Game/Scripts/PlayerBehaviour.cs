@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Scripts.Interactable;
@@ -16,6 +17,7 @@ namespace Game.Scripts
     
     public class PlayerBehaviour : CharacterBehaviour
     {
+        public static event Action CharacterDied;
         
         [SerializeField] private PlayerMovementBehaviour _pmb;
         [SerializeField] private List<Animator> _animators;
@@ -162,6 +164,17 @@ namespace Game.Scripts
             {
                 _oldPlayer.Animator.SetTrigger("Die");
             }
+            
+            _pmb.ToggleMovement(false);
+            _canAttack = false;
+
+            StartCoroutine(RestartCoroutine());
+        }
+
+        private IEnumerator RestartCoroutine()
+        {
+            yield return new WaitForSeconds(1f);
+            CharacterDied?.Invoke();
         }
     }
 }

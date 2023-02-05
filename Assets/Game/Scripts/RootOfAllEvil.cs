@@ -15,6 +15,7 @@ namespace Game.Scripts
         {
             currentLevelIndex = 0;
             DontDestroyOnLoad(gameObject);
+            PlayerBehaviour.CharacterDied += OnCharacterDied;
         }
 
         private void LoadNextLevel()
@@ -32,7 +33,13 @@ namespace Game.Scripts
             
             ExitTrigger.ExitTriggered += OnExitTriggered;
         }
-        
+
+        private void OnCharacterDied()
+        {
+            SceneManager.UnloadSceneAsync(currentLevelIndex);
+            SceneManager.LoadScene(currentLevelIndex);        
+        }
+
         private void OnExitTriggered()
         {
             ExitTrigger.ExitTriggered -= OnExitTriggered;
