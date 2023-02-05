@@ -35,6 +35,11 @@ namespace Game.Scripts.Levels
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
+                if (_player.IsClimbing)
+                {
+                    return;
+                }
+                
                 TimeSwitched?.Invoke();
 
                 if (_currentTimeState == TimeState.Future)

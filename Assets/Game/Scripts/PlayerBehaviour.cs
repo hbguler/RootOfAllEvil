@@ -23,6 +23,8 @@ namespace Game.Scripts
         [SerializeField] private SubPlayerBehaviour _oldPlayer;
         [SerializeField] private SubPlayerBehaviour _modernPlayer;
 
+        public bool IsClimbing;
+        
         private float _attackIntervalTime = 2f;
         private bool _canAttack = false;
         private Coroutine _attackCoroutine;
@@ -34,11 +36,13 @@ namespace Game.Scripts
         {
             _pmb.Initialize();
             _canAttack = true;
+
+            IsClimbing = false;
         }
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0) && _canAttack)
+            if (Input.GetMouseButtonDown(0) && _canAttack && IsClimbing == false)
             {
                 _attackCoroutine = StartCoroutine(AttackCoroutine());
             }
@@ -52,6 +56,7 @@ namespace Game.Scripts
                         break;
                     case InteractionType.Climb:
                         Debug.Log("Climb started");
+                        IsClimbing = true;
 
                         _pmb.ToggleMovement(false);
                         foreach (Animator animator in _animators)
@@ -77,6 +82,7 @@ namespace Game.Scripts
                 animator.SetTrigger("Idle");
             
             _pmb.ToggleMovement(true);
+            IsClimbing = false;
         }
 
         private void OnTriggerEnter(Collider other)
