@@ -21,16 +21,15 @@ namespace Game.Scripts
         {
             if (currentLevelIndex == 0)
             {
-                SceneManager.LoadScene(_levels[0]);
-                
+                SceneManager.LoadScene(1);
+                currentLevelIndex = 1;
             }
             else
             {
-
                 SceneManager.UnloadSceneAsync(currentLevelIndex);
                 SceneManager.LoadScene(++currentLevelIndex);
             }
-
+            
             ExitTrigger.ExitTriggered += OnExitTriggered;
         }
         
