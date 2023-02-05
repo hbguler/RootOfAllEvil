@@ -9,6 +9,7 @@ namespace Game.Scripts
         [SerializeField] private Vector3 _closedScale = new Vector3(0, 1, 1);
         [SerializeField] private Vector3 _openScale = Vector3.one;
         [SerializeField] private GameObject _bridge;
+        [SerializeField] private GameObject _bridgeBlockerCollider;
 
         [SerializeField] private BridgeButtonBehaviour _bridgeButton;
 
@@ -21,7 +22,8 @@ namespace Game.Scripts
         {
             _bridgeButton.Initialize();
             _bridge.transform.localScale = _closedScale;
-
+            _bridgeBlockerCollider.gameObject.SetActive(true);
+            
             _bridgeButton.ButtonPressed += OnButtonPressed;
         }
 
@@ -34,7 +36,10 @@ namespace Game.Scripts
 
         public void OpenBridge()
         {
-            _bridge.transform.DOScale(_openScale, 1f).SetEase(Ease.InOutQuad);
+            _bridge.transform.DOScale(_openScale, 1f).SetEase(Ease.InOutQuad).OnComplete(() =>
+            {
+                _bridgeBlockerCollider.gameObject.SetActive(false);
+            });
         }
     }
 }
